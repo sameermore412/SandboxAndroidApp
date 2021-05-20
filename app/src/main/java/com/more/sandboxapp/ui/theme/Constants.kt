@@ -1,0 +1,1 @@
+const val cardAspectRatio = 5/7f
