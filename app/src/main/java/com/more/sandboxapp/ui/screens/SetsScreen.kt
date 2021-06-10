@@ -17,6 +17,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -31,7 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import cardAspectRatio
 import coil.ImageLoader
 import coil.decode.SvgDecoder
@@ -44,8 +45,9 @@ import com.more.sandboxapp.ui.widgets.MagicLoadingIndicator
 
 val setWidth = 180.dp
 
+@ExperimentalMaterialApi
 @Composable
-fun SetsScreenContainer(setViewModel: SetsViewModel = hiltNavGraphViewModel(), openSet: (MagicSet) -> Unit) {
+fun SetsScreenContainer(setViewModel: SetsViewModel = hiltViewModel(), openSet: (MagicSet) -> Unit) {
     setViewModel.fetchCoreSets()
     setViewModel.fetchOfficialSets()
 
@@ -61,6 +63,7 @@ fun SetsScreenContainer(setViewModel: SetsViewModel = hiltNavGraphViewModel(), o
     }
 }
 
+@ExperimentalMaterialApi
 @Composable
 fun SetsScreen(latestSets: List<MagicSet>, coreSets: List<MagicSet>, openSet: (MagicSet) -> Unit) {
     Box(contentAlignment = Alignment.Center) {
@@ -71,6 +74,7 @@ fun SetsScreen(latestSets: List<MagicSet>, coreSets: List<MagicSet>, openSet: (M
     }
 }
 
+@ExperimentalMaterialApi
 @Composable
 fun SetRow(title: String, cardSetList: List<MagicSet>, openSet: (MagicSet) -> Unit) {
     Column {
@@ -83,6 +87,7 @@ fun SetRow(title: String, cardSetList: List<MagicSet>, openSet: (MagicSet) -> Un
     }
 }
 
+@ExperimentalMaterialApi
 @Composable
 fun SetCard(magicSet: MagicSet, openSet: (MagicSet) -> Unit) {
     val imageLoader = ImageLoader.Builder(LocalContext.current)
@@ -92,13 +97,12 @@ fun SetCard(magicSet: MagicSet, openSet: (MagicSet) -> Unit) {
         .build()
     CompositionLocalProvider(LocalImageLoader provides imageLoader) {
         Card(
+            onClick = {openSet(magicSet)},
             modifier = Modifier
                 .width(setWidth)
                 .aspectRatio(cardAspectRatio)
                 .padding(end = 8.dp)
-                .clickable { openSet(magicSet) }
         ) {
-            Text(text = magicSet.name)
             Image(
                 painter = rememberCoilPainter(
                     magicSet.iconUrl,
@@ -106,6 +110,7 @@ fun SetCard(magicSet: MagicSet, openSet: (MagicSet) -> Unit) {
                 contentDescription = magicSet.name,
                 modifier = Modifier.padding(20.dp)
             )
+            Text(text = magicSet.name)
         }
     }
 }

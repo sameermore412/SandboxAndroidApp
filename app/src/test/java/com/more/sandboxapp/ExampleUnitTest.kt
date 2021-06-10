@@ -46,7 +46,7 @@ class ExampleUnitTest {
 
         }
 
-        println(pair?.first)
-        println(pair?.second)
+//        println(pair?.first)
+//        println(pair?.second)
     }
 }
