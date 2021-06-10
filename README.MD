@@ -7,6 +7,8 @@ The `app` module contains most of the code for the app.
 The `api` module contains code for working with different services and Retrofit.
 
 ## Screenshots
+<p float="left">
 <img src="./screenshots/mtg_set_screen.png" width = 200>
 <img src="./screenshots/mtg_card_list_screen.png" width = 200>
 <img src="./screenshots/mtg_card_detail_screen.png" width = 200>
+</p>
