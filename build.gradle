@@ -3,7 +3,7 @@ buildscript {
     ext {
         compose_version = '1.0.0-beta08'
         room_version = '2.2.6'
-        dagger_version = '2.36'
+        dagger_version = '2.37'
     }
     repositories {
         google()
@@ -13,7 +13,8 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0-beta03'
+        //Using alpha02 to fix https://github.com/google/dagger/issues/2634.
+        classpath 'com.android.tools.build:gradle:7.1.0-alpha02'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$dagger_version"
     }
